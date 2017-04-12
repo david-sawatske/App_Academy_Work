@@ -58,10 +58,30 @@ VALUES
 
 # Now we are ready to generate the db in the terminal
 
-=> cat import_db.sql | sqlite3 plays.db
+~$ cat import_db.sql | sqlite3 plays.db
 # concatinate  the output from import_db into sqlite3 in the file plays.db
 
 # Now we enter the sqlite3 command shell terminal to access data
-=> sqlite3 plays.db
+~$ sqlite3 plays.db
 sqlite3> .tables # shows what table are in that db
 sqlite3> .schema # represents the sturcture of db
+
+sqlite> SELECT year FROM plays WHERE title = "All My Sons"; # use sql commands
+  =>1947
+
+# And also add data
+sqlite> INSERT INTO playwrights (name, birth_year) VALUES ('Tennesee Williams', 1911
+sqlite> SELECT * FROM playwrights
+  => 1|Arthur Miller|1915
+     2|Eugene O Neill|1888
+     3|Tennesee Williams|1911
+
+
+# Use the SQLlite3 gem to interact with DB with in Ruby
+# in pry
+~$ require 'sqlite3'
+# varable to using gem, Database class, initilize with the db we want to assign
+~$ plays_db = SQLite3::Database.new(',/plays.db')
+# now we want to access/ write something in the newly initilized instance of the DB class
+~$ plays_db.execute("SELECT * FROM plays")
+=> # lists all of the plays in an array

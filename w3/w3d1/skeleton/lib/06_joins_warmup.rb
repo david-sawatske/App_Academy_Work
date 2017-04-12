@@ -63,28 +63,28 @@ def trek_films
   # these movies include the words Star Trek in the title). Order results by
   # year.
   execute(<<-SQL)
-    SELECT
-      id,
-      title,
-      yr
-    FROM
-      movies
-    WHERE
-      title LIKE '%Star Trek%'
-    ORDER BY
-      yr;
+  SELECT
+    id,
+    title,
+    yr
+  FROM
+    movies
+  WHERE
+    title LIKE '%Star Trek%'
+  ORDER BY
+    yr;
   SQL
 end
 
 def films_by_id
   # What are the titles of the films with id 1119, 1595, 1768?
   execute(<<-SQL)
-    SELECT
-      title
-    FROM
-      movies
-    WHERE
-      id IN (1119, 1595, 1768);
+  SELECT
+    title
+  FROM
+    movies
+  WHERE
+    id in (1119, 1595, 1768);
   SQL
 end
 
@@ -135,9 +135,9 @@ def alien_cast
     FROM
       actors
     JOIN
-      castings ON castings.actor_id = actors.id
+      castings ON actors.id = castings.actor_id
     JOIN
-      movies ON movies.id = castings.movie_id
+      movies ON castings.movie_id = movies.id
     WHERE
       movies.title = 'Alien';
   SQL
