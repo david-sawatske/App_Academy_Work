@@ -1,0 +1,49 @@
+require 'launchy'
+
+def give_url(user)
+  puts 'Type in your long url'
+  print '>'
+  long_url = gets.chomp
+
+  short = ShortenedUrl.from_url(user: user, long_url: long_url)
+
+  puts "Your short url is: #{short.short_url}"
+  puts "Goodbye"
+end
+
+def visit_url
+  puts 'Type in the shortened URL'
+  print '>'
+  url_input = gets.chomp
+  url = ShortenedUrl.find_by_short_url(url_input)
+  long = url.long_url
+  puts 'Launching #{long}'
+  puts 'Goodbye!'
+  Launchy.open(long)
+end
+
+def get_user
+  puts 'Input your email:'
+  print '>'
+  input_email = gets.chomp
+
+  if User.exists?(email: input_email)
+    User.find_by_email(input_email)
+  else
+    User.create(email: input_email)
+  end
+end
+
+user = get_user
+
+puts 'What do you want to do?'
+puts '0. Create shortened URL'
+puts '1. Visit shortened URL'
+print '>'
+
+choice = gets.chomp.to_i
+if choice == 0
+  give_url(user)
+else
+  visit_url
+end
