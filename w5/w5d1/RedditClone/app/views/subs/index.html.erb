@@ -1,0 +1,9 @@
+<ul>
+  <% if @subs %>
+    <% @subs.each do |sub|%>
+      <li><%= link_to sub.title,  sub_url(sub) %></li>
+    <% end %>
+  <% else %>
+    No Subs
+  <% end %>
+</ul>

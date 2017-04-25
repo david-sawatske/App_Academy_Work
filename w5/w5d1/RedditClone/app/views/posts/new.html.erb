@@ -1,0 +1,23 @@
+<form action="<%= new_sub_url %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  Title:
+  <input name="post[title]" value="<%= @post.title %>">
+
+  URL:
+  <input name="post[url]" value="<%= @post.url %>">
+
+  Post:
+   <textarea name="post[content]"><%= @post.content %></textarea>
+
+  Sub IDs:
+   <input type="hidden" name="post[sub_ids][]">
+     <% Sub.all.each do |sub| %>
+         <input
+           type="checkbox"
+           name="post[sub_ids][]"
+           value="<%= sub.id %>"
+           <%= "checked" if @post.sub_id.include?(sub.id) %>>
+         <%= sub.title %>
+     <% end %>
+  </form>

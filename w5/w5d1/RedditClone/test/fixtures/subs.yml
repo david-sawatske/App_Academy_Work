@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  destcription: MyText
+  moderator: 1
+
+two:
+  title: MyString
+  destcription: MyText
+  moderator: 1
